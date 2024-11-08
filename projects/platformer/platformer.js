@@ -29,14 +29,12 @@ $(function () {
      */
 
     // drawGrid();
-
+ 
     /////////////////////////////////////////////////
     //////////ONLY CHANGE BELOW THIS POINT///////////
     /////////////////////////////////////////////////
 
     // TODO 1
-    // You must decide the x position, y position, width, and height of the platforms
-    // example usage: createPlatform(x,y,width,height)
     createPlatform(600, 661, 600, 0.05)
     createPlatform(1200, 600, 0.03, 50)
     createPlatform(1240, 650, 20, 0.05)
@@ -52,6 +50,9 @@ $(function () {
     createPlatform(350, 530, 3, 0.05)
     createPlatform(50, 590, 15, 0.05)
     createPlatform(0, 500, 15, 0.05)
+    // You must decide the x position, y position, width, and height of the platforms
+    // example usage: createPlatform(x,y,width,height)
+
 
 
     
@@ -64,12 +65,14 @@ $(function () {
     createCollectable('kennedi', 0, 400, 0, 0)
 
 
+
     
     // TODO 3
     // Create cannons
     // You must decide the wall you want the cannon on, the position on the wall, and the time between shots in milliseconds
     // Your wall choices are: 'top' 'left' 'right' and 'bottom'
     // example usage: createCannon(side, position, delay, width, height)
+
 
 
     
