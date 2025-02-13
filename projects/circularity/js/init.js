@@ -22,7 +22,7 @@ var init = function (window) {
         // TODO 1 : Declare and initialize our variables
 var circle;
 var circles = [];
-var balls = prompt("How many BALLS do you want?")
+
 
         // TODO 2 : Create a function that draws a circle 
         function drawCircle(){
@@ -33,7 +33,7 @@ var balls = prompt("How many BALLS do you want?")
         }
 
         // TODO 3 / 7 : Call the drawCircle() function 
-        for(var i = 0; i < balls; i++) {
+        for(var i = 0; i < 100; i++) {
             drawCircle();
         }
 
@@ -56,11 +56,11 @@ var balls = prompt("How many BALLS do you want?")
             
 
             // TODO 8 / 9 : Iterate over the array
-            for(var i = 0; i < balls; i++) {
+            for(var i = 0; i < 100; i++) {
                 physikz.updatePosition(circles[i]);
             }
             
-            for(var i = 0; i < balls; i++) {
+            for(var i = 0; i < 100; i++) {
                 game.checkCirclePosition(circles[i]);
             }
             
