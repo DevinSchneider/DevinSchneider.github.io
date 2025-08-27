@@ -6,7 +6,7 @@ $(document).ready(function () {
 
 // this section initializes some variables that will be used throughout the program
 var doubleMaxSpeed = 5;
-var maxGhosts = 10;
+var maxGhosts = prompt("How many gosts do you want");
 var $board = $("#board");
 var boardWidth = $($board).width();
 var boardHeight = $($board).height();
@@ -159,7 +159,7 @@ function bounceGhost(ghost) {
 
 // this redraws the ghost's position on the screen
 function updateGhostOnScreen(ghost) {
-  maxGhosts = 10;
+  maxGhosts = maxGhosts;
 
   // these lines redraw the ghost's position
   $(ghost.id).css("left", ghost.x);

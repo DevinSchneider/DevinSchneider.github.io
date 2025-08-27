@@ -1,6 +1,6 @@
 
 body {
-  background-color: darkgreen;
+  background-color: rgb(31, 31, 31);
 }
 
 #board {
@@ -8,10 +8,13 @@ body {
   height: 440px;
   border: 1px solid white;
   background-color: black;
+  
 }
 
 #score, #highScore {
-  color: white;
+  color: rgb(85, 0, 85);
+  font-family:Arial, Helvetica, sans-serif;
+  
 }
 
 .snake, .apple {
@@ -20,6 +23,7 @@ body {
   height: 20px;
   position: absolute;
   user-select: none;
+  
 }
 
 .snake {
