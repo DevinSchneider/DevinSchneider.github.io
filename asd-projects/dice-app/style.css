@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(71, 71, 71);
+
+}
+#die {
+  height: 100px;
+  width: 100px;
+  background-color: lightgray; /* Feel free to customize */
+  position: absolute;
+  top: 20%;
+  left: 30%;
+}
+#die2 {
+  height: 100px;
+  width: 100px;
+  background-color: lightgray; /* Feel free to customize */
+  position: absolute;
+  top: 20%;
+  left: 65%;
+}
+#die3 {
+  height: 100px;
+  width: 100px;
+  background-color: lightgray; /* Feel free to customize */
+  position: absolute;
+  top: 50%;
+}
+#die4 {
+  height: 100px;
+  width: 100px;
+  background-color: lightgray; /* Feel free to customize */
+  position: absolute;
+  top: 80%;
+  left: 30%;
+}
+#die5 {
+  height: 100px;
+  width: 100px;
+  background-color: lightgray; /* Feel free to customize */
+  position: absolute;
+  top: 80%;
+  left: 65%;
+}

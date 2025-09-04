@@ -111,7 +111,7 @@ function checkForNewDirection(event) {
   }
   // FILL IN THE REST
 
-  console.log(snake.head.direction);     // uncomment me!
+  console.log(snake.head.direction);    
 }
 
 function moveSnake() {
@@ -132,8 +132,6 @@ for (var i = snake.body.length - 1; i > 0; i--) {
 
     repositionSquare(currentSnakeSquare);
 }
-
-
 
   //Before moving the head, check for a new direction from the keyboard input
   checkForNewDirection();
@@ -201,7 +199,6 @@ else {
 }
 
 
-  return false;
 }
 
 function handleAppleCollision() {
@@ -232,8 +229,6 @@ function hasCollidedWithSnake() {
     return true
   }
 }
-
-
   return false;
 }
 
