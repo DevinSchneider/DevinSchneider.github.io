@@ -10,9 +10,21 @@ function runProgram(){
   // Constant Variables
   var FRAME_RATE = 60;
   var FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
-  
+  var walker ={
+    x:0,
+    y:0,
+    speedX:0,
+    speedY:0
+    
+  }
   // Game Item Objects
-
+const KEY = {
+  ENTER: 13,
+  LEFT: 65,
+  UP: 87,
+  RIGHT: 68,
+  DOWN: 83,
+};
 
   // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
@@ -23,7 +35,8 @@ function runProgram(){
 
   Note: You can have multiple event listeners for different types of events.
   */
-  $(document).on('eventType', handleEvent);                          
+  $(document).on('keydown', handleKeyDown);    
+  $(document).on('keyup', handleKeyUp);                      
 
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
@@ -34,25 +47,83 @@ function runProgram(){
   by calling this function and executing the code inside.
   */
   function newFrame() {
-    
-
+    repositionGameItem()
+    redrawGameItem()
+    wallCollision()
   }
   
   /* 
   This section is where you set up the event handlers for user input.
-  For example, if you wanted to make an event handler for a click event, you should rename this function to 'handleClick', then write the code that should execute when the click event occurs.
+  For example, if you wanted to make an event handler for a click event, you should srename this function to 'handleClick', then write the code that should execute when the click event occurs.
   
   Note: You can have multiple event handlers for different types of events.
   */
-  function handleEvent(event) {
+
+  function handleKeyDown(event) {
+   if (event.which === KEY.LEFT) {
+    walker.speedX = walker.speedX - 5
+}
+    else if (event.which === KEY.RIGHT) {
+    walker.speedX = walker.speedX + 5
+}
+    else if (event.which === KEY.UP) {
+    walker.speedY = walker.speedY - 5
+}
+    else if (event.which === KEY.DOWN) {
+    walker.speedY = walker.speedY + 5   
+}
+    else if (event.which === KEY.ENTER) {
+    console.log("enter pressed");
+}
+  }
+  function handleKeyUp (event) {
+   if (event.which === KEY.LEFT) {
+    walker.speedX = 0
+}
+    else if (event.which === KEY.RIGHT) {
+  walker.speedX = 0
+}
+    else if (event.which === KEY.UP) {
+    walker.speedY = 0
+}
+    else if (event.which === KEY.DOWN) {
+    walker.speedY = 0 
+}
+    else if (event.which === KEY.ENTER) {
+    console.log("enter pressed");
+}
+
 
   }
 
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
-
+  function repositionGameItem() {
+    walker.x = walker.speedX + walker.x;
+    walker.y = walker.speedY + walker.y;
+  }
   
+  function redrawGameItem() {
+    $("#walker").css("left", walker.x)
+    $("#walker").css("top", walker.y)
+  }
+  function wallCollision() {
+    if (walker.x < 0) {
+    walker.speedX =  +10
+    }
+    else if (walker.y < 0) {
+    walker.speedY = +10
+    }
+    else if (walker.x > $("#board").width()) {
+      walker.speedX = -10
+    }
+    else if (walker.y > $("#board").height()) {
+      walker.speedY = -10 
+    }
+  }
+
+
   function endGame() {
     // stop the interval timer
     clearInterval(interval);
