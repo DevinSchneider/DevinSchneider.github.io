@@ -1,0 +1,158 @@
+body {
+  background: rgb(37, 37, 37);
+  color: rgb(83, 83, 83);
+  padding: 10px;
+  font-family: arial;
+  background-image: url(https://www.photos-public-domain.com/wp-content/uploads/2012/07/sheet-music-texture.jpg);
+  background-repeat: no-repeat;
+  background-size: cover; /* Ensures the image covers the entire screen */
+  background-position: center;
+  min-height: 100vh;
+  min-width: 100vw;
+  overflow-x: hidden;
+}
+#all-contents {
+  max-width: 800px;
+  margin: auto;
+}
+body::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+/* navigation menu */
+nav {
+  background: rgb(0, 0, 0);
+  margin: 0 auto;
+  margin-bottom: 20px;
+  display: flex;
+  padding: 10px;
+  border-radius: 10px;
+}
+h1 {
+  display: flex;
+  align-items: center;
+  color: #9c9c9c;
+  flex: 1;
+  margin: 0;
+}
+#nav-ul {
+  list-style-image: none;
+}
+.nav-li {
+  display: inline-block;
+  padding: 0 10px;
+}
+a {
+  text-decoration: none;
+  color: #9c9c9c;
+}
+
+/* main container area beneath menu */
+main {
+  background: rgb(26, 26, 26);
+  display: flex;
+}
+.sidebar {
+  margin-right: 25px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 820px; /* Enough for two 400px images + padding */
+  justify-content: flex-start;
+}
+.sidebar-img {
+  width: 350px;
+  height: 400px;
+  margin-bottom: 20px;
+}
+.content {
+  flex: 1;
+  background-color: rgb(26, 26, 26);
+  padding: 15px;
+}
+
+/* portfolio styles */
+#interests {
+  border: 4px rgb(0, 0, 0) ridge;
+  padding: 8px;
+}
+h2,
+h3 {
+  margin: 0px;
+}
+/* portfolio styles */
+.content h1 {
+  color: black;
+}
+
+#portfolio {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+#portfolio li {
+  background: #500b48;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+#portfolio li:hover {
+  background: #7c226d;
+}
+
+#portfolio a {
+  text-decoration: none;
+  color: #000000;
+}
+/* responsive web design */
+@media screen and (min-width: 120px) and (max-width: 1080px) {
+  main {
+    height: 100ch;
+    zoom: 1.5;
+    display: grid;
+  }
+
+  h1 {
+    font-size: 44px;
+  }
+
+  h2 {
+    font-size: 42px;
+  }
+
+  h3 {
+    font-size: 36px;
+  }
+
+  #all-contents {
+    height: 100ch;
+    margin: none;
+  }
+
+  a {
+    font-size: 42px;
+  }
+
+  .sidebar {
+    margin-right: 0px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sidebar-img {
+    width: 100%;
+  }
+
+  p,
+  li {
+    font-size: 24px;
+  }
+
+  .content {
+    align-content: center;
+    justify-content: center;
+  }
+}

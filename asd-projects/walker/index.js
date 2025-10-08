@@ -55,35 +55,26 @@ const KEY = {
   else if (event.which === 2) {
     $("#walker").css("background-color", "black");
   } 
-}
-);
-$(document).mouseup(
-  function(event) {
   if (event.which === 1) {
-    $("#walker").css("background-color", "rgb(77, 77, 77)");
-  } 
-  else if (event.which === 2) {
-    $("#walker").css("background-color", "rgb(77, 77, 77)");
-  } 
-}
-);
-
-$(document).mousedown(
-  function(event) {
-  if (event.which === KEY.Q) {
     $("#walker2").css("background-color", "white");
   } 
-  else if (event.which === KEY.Q) {
+  else if (event.which === 2) {
     $("#walker2").css("background-color", "goldenrod");
   } 
 }
 );
 $(document).mouseup(
   function(event) {
-  if (event.which === KEY.E) {
+    if (event.which === 1) {
+    $("#walker").css("background-color", "rgb(77, 77, 77)");
+  } 
+  else if (event.which === 2) {
+    $("#walker").css("background-color", "rgb(77, 77, 77)");
+  } 
+  if (event.which === 1) {
     $("#walker2").css("background-color", "rgb(31, 31, 31)");
   } 
-  else if (event.which === KEY.E) {
+  else if (event.which === 2) {
     $("#walker2").css("background-color", "rgb(31, 31, 31)");
   } 
 }
@@ -121,32 +112,32 @@ $(document).mouseup(
 
   function handleKeyDown(event) {
    if (event.which === KEY.A) {
-    walker.speedX = walker.speedX - 5
+    walker.speedX = -5
 }
     else if (event.which === KEY.D) {
-    walker.speedX = walker.speedX + 5
+    walker.speedX = 5
 }
     else if (event.which === KEY.W) {
-    walker.speedY = walker.speedY - 5
-}
+    walker.speedY = -5
+    }
     else if (event.which === KEY.S) {
-    walker.speedY = walker.speedY + 5   
+    walker.speedY = 5   
 }
     else if (event.which === KEY.ENTER) {
     console.log("enter pressed");
 }
 
 if (event.which === KEY.LEFT) {
-    walker2.speedX = walker2.speedX - 5
+    walker2.speedX = -5
 }
     else if (event.which === KEY.RIGHT) {
-    walker2.speedX = walker2.speedX + 5
+    walker2.speedX = 5
 }
     else if (event.which === KEY.UP) {
-    walker2.speedY = walker2.speedY - 5
+    walker2.speedY = -5
 }
     else if (event.which === KEY.DOWN) {
-    walker2.speedY = walker2.speedY + 5   
+    walker2.speedY = 5   
 }
     else if (event.which === KEY.ENTER) {
     console.log("enter pressed");
@@ -173,7 +164,7 @@ if (event.which === KEY.LEFT) {
     walker2.speedX = 0
 }
     else if (event.which === KEY.RIGHT) {
-  walker2.speedX = 0
+    walker2.speedX = 0
 }
     else if (event.which === KEY.UP) {
     walker2.speedY = 0

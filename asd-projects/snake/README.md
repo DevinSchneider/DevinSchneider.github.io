@@ -1011,7 +1011,7 @@ When you're completely finished:
 
    ```bash
    git add .
-   git commit -m "Completed Snake game"
+   git commit -m "Done with new thing"
    git push
    ```
 
