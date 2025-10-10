@@ -68,28 +68,161 @@
 
             <!-- Simple floating music control with volume slider -->
             <div id="music-control" aria-hidden="false" title="Play / Pause background music">
-                    <button id="music-toggle">Play Music</button>
-                    <label for="music-volume" class="sr-only">Music volume</label>
-                    <input id="music-volume" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Music volume" />
+                <button id="music-toggle">Play Music</button>
+                <label for="music-volume" class="sr-only">Music volume</label>
+                <input id="music-volume" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Music volume" />
+                                <div id="music-progress-container" style="margin-top:10px; width:100%; max-width:340px;">
+                                                    <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:4px;">
+                                                        <button id="music-prev" title="Previous song" style="font-size:20px; background:none; border:none; cursor:pointer; color:#000;">&#8592;</button>
+                                                        <div id="music-song-title" style="font-weight:bold; color:#000; text-align:center;"></div>
+                                                        <button id="music-next" title="Next song" style="font-size:20px; background:none; border:none; cursor:pointer; color:#000;">&#8594;</button>
+                                                    </div>
+
+                                        <input id="music-progress" type="range" min="0" max="100" value="0" step="0.1" aria-label="Song progress" />
+                                        <div style="display:flex; justify-content:space-between; font-size:12px; color:#000;">
+                                                <span id="music-current-time">0:00</span>
+                                                <span id="music-duration">0:00</span>
+                                        </div>
+                                </div>
+                                <style>
+                                #music-progress {
+                                    width: 100%;
+                                    height: 12px;
+                                    background: transparent;
+                                    margin: 0;
+                                    appearance: none;
+                                    -webkit-appearance: none;
+                                    border-radius: 8px;
+                                    outline: none;
+                                    box-shadow: 0 0 0 2px #fff2, 0 2px 8px #0004;
+                                }
+                                #music-progress::-webkit-slider-runnable-track {
+                                    height: 12px;
+                                    background: linear-gradient(90deg, #666666 0%, #000000 100%);
+                                    border-radius: 8px;
+                                }
+                                #music-progress::-webkit-slider-thumb {
+                                    -webkit-appearance: none;
+                                    appearance: none;
+                                    width: 20px;
+                                    height: 20px;
+                                    border-radius: 50%;
+                                    background: #000000;
+                                    border: 2px solid #2c2c2c;
+                                    box-shadow: 0 2px 8px #49494940;
+                                    cursor: pointer;
+                                    margin-top: -4px;
+                                }
+                                #music-progress:focus::-webkit-slider-thumb {
+                                    outline: 2px solid #000000;
+                                }
+                                #music-progress::-moz-range-thumb {
+                                    width: 20px;
+                                    height: 20px;
+                                    border-radius: 50%;
+                                    background: #000000;
+                                    border: 2px solid #ff5e62;
+                                    box-shadow: 0 2px 8px #ff5e6240;
+                                    cursor: pointer;
+                                }
+                                #music-progress::-ms-thumb {
+                                    width: 20px;
+                                    height: 20px;
+                                    border-radius: 50%;
+                                    background: #1f1f1f;
+                                    border: 2px solid #ff5e62;
+                                    box-shadow: 0 2px 8px #00000040;
+                                    cursor: pointer;
+                                }
+                                #music-progress::-moz-range-track {
+                                    height: 12px;
+                                    background: linear-gradient(90deg, #000000 0%, #ff5e62 100%);
+                                    border-radius: 8px;
+                                }
+                                #music-progress::-ms-fill-lower {
+                                    background: #000000;
+                                    border-radius: 8px;
+                                }
+                                #music-progress::-ms-fill-upper {
+                                    background: #6e6e6e;
+                                    border-radius: 8px;
+                                }
+                                #music-progress:focus {
+                                    outline: 2px solid #000000;
+                                }
+                                #music-progress::-ms-tooltip { display: none; }
+                                </style>
             </div>
 
             <script>
-            // Playlist music player with volume and status
+            // Playlist music player with volume, status, and progress bar
             (function(){
                 const audio = document.getElementById('bg-audio');
                 const btn = document.getElementById('music-toggle');
                 const vol = document.getElementById('music-volume');
                 const PLAY_KEY = 'bg-music-playing';
                 const VOL_KEY = 'bg-music-volume';
+                const progress = document.getElementById('music-progress');
+                const progressContainer = document.getElementById('music-progress-container');
+                const currentTimeSpan = document.getElementById('music-current-time');
+                const durationSpan = document.getElementById('music-duration');
+                // Format seconds as m:ss
+                function formatTime(secs) {
+                    if (!isFinite(secs) || secs < 0) return '0:00';
+                    const m = Math.floor(secs / 60);
+                    const s = Math.floor(secs % 60);
+                    return m + ':' + (s < 10 ? '0' : '') + s;
+                }
+                // Update progress bar as song plays
+                function updateProgress() {
+                    if (!audio.duration) {
+                        progress.value = 0;
+                        currentTimeSpan.textContent = '0:00';
+                        durationSpan.textContent = '0:00';
+                        return;
+                    }
+                    const percent = (audio.currentTime / audio.duration) * 100;
+                    progress.value = percent;
+                    currentTimeSpan.textContent = formatTime(audio.currentTime);
+                    durationSpan.textContent = formatTime(audio.duration);
+                }
 
+                audio.addEventListener('timeupdate', updateProgress);
+                audio.addEventListener('loadedmetadata', updateProgress);
+                audio.addEventListener('ended', function(){
+                    progress.value = 0;
+                    currentTimeSpan.textContent = '0:00';
+                    durationSpan.textContent = formatTime(audio.duration);
+                });
+
+                // Allow seeking by clicking/dragging the progress bar
+                progress.addEventListener('input', function(){
+                    if (audio.duration) {
+                        audio.currentTime = (progress.value / 100) * audio.duration;
+                    }
+                });
+                const prevBtn = document.getElementById('music-prev');
+                const nextBtn = document.getElementById('music-next');
+                prevBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    setTrack((currentTrack - 1 + playlist.length) % playlist.length);
+                    audio.play();
+                });
+                nextBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    setTrack((currentTrack + 1) % playlist.length);
+                    audio.play();
+                });
                 // Playlist of 4 songs (update src as needed)
-                const playlist = [
-                    'music/Spring.mp3',
-                    'music/Summer.mp3',
-                    'music/Autumn.mp3',
-                    'music/Winter.mp3'
-                ];
+                    // Playlist: add song names for display
+                    const playlist = [
+                        {src: 'music/Spring.mp3', name: "Vivaldi's Spring"},
+                        {src: 'music/Summer.mp3', name: "Vivaldi's Summer"},
+                        {src: 'music/Autumn.mp3', name: "Vivaldi's Autumn"},
+                        {src: 'music/Winter.mp3', name: "Vivaldi's Winter"}
+                    ];
                 let currentTrack = 0;
+                    const songTitle = document.getElementById('music-song-title');
 
                 // Status display (create if missing)
                 let status = document.getElementById('music-status');
@@ -98,7 +231,7 @@
                     status.id = 'music-status';
                     status.style.position = 'fixed';
                     status.style.right = '16px';
-                    status.style.bottom = '64px';
+                    status.style.bottom = '90px';
                     status.style.background = 'rgba(0,0,0,0.7)';
                     status.style.color = '#fff';
                     status.style.padding = '6px 10px';
@@ -132,7 +265,9 @@
                 function setTrack(idx) {
                     currentTrack = idx % playlist.length;
                     if(currentTrack < 0) currentTrack = playlist.length - 1;
-                    audio.src = playlist[currentTrack];
+                        audio.src = playlist[currentTrack].src;
+                        // Update song title
+                        songTitle.textContent = playlist[currentTrack].name;
                     audio.load();
                 }
                 setTrack(0);
@@ -144,7 +279,11 @@
                         return;
                     }
                     if(audio.paused){
-                        try { audio.load(); } catch(e){}
+                        // Only reload if the source was just changed (not just paused)
+                        // If audio.currentTime is 0 and audio.ended, reload to restart
+                        if (audio.currentTime === 0 && audio.ended) {
+                            try { audio.load(); } catch(e){}
+                        }
                         audio.play().then(()=>{
                             updateButton(true);
                             localStorage.setItem(PLAY_KEY, '1');
@@ -166,6 +305,10 @@
                     setTrack((currentTrack + 1) % playlist.length);
                     audio.play();
                 });
+                    // Also update title if user seeks to a new track (future-proof)
+                    audio.addEventListener('loadeddata', function(){
+                        songTitle.textContent = playlist[currentTrack].name;
+                    });
 
                 // Volume slider handler
                 vol.addEventListener('input', function(){
