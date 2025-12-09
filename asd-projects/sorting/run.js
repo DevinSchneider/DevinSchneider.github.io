@@ -9,6 +9,7 @@ $(document).ready(function(){
 
             if (bubbleSort){
                 bubbleSort(bubbleList);
+
             }
             if (quickSort){
                 quickSort(quickList, 0, quickList.length-1);
